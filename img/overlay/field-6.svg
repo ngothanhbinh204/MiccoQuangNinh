@@ -1,0 +1,22 @@
+<svg width="700" height="811" viewBox="0 0 700 811" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="700" height="811" fill="url(#paint0_linear_16498_7307)"/>
+<rect width="700" height="811" fill="url(#pattern0_16498_7307)" fill-opacity="0.8" style="mix-blend-mode:multiply"/>
+<defs>
+<linearGradient id="paint0_linear_16498_7307" x1="42" y1="-1.00951e-05" x2="700" y2="811" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C8E0FF"/>
+<stop offset="1" stop-color="#D3E6FF"/>
+</linearGradient>
+<pattern id="pattern0_16498_7307" patternUnits="userSpaceOnUse" patternTransform="matrix(2384.9 0 0 4661.88 28.5845 182.714)" preserveAspectRatio="none" viewBox="0 0 2981.13 5827.35" width="1" height="1">
+<use xlink:href="#pattern0_16498_7307_inner" transform="translate(-2981.13 0)"/>
+<g id="pattern0_16498_7307_inner">
+<g opacity="0.1">
+<path d="M508.34 303.353H396.617V785.357H505.989V389.824L795.473 631.248L508.34 303.353Z" fill="#104891"/>
+<path d="M554.79 531.943V785.357H803.539V689.462L554.79 531.943Z" fill="#00B35C"/>
+<path d="M102.931 785.357H0V235.727L102.931 64.0044V785.357Z" fill="#104891"/>
+<path d="M338.194 0H160.208V785.354H342.472V109.584L659.846 401.811L338.194 0Z" fill="#104891"/>
+</g>
+</g>
+<use xlink:href="#pattern0_16498_7307_inner" transform="translate(-1490.56 2913.68)"/>
+<use xlink:href="#pattern0_16498_7307_inner" transform="translate(1490.56 2913.68)"/>
+</pattern></defs>
+</svg>
