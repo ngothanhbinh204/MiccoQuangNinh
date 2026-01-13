@@ -1,0 +1,118 @@
+{
+  "key": "group_dich_vu_single",
+  "title": "Chi tiết Dịch Vụ - Content Fields",
+  "fields": [
+    {
+      "key": "tab_dich_vu_intro",
+      "label": "📌 Giới thiệu",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_intro",
+      "name": "service_intro",
+      "label": "Nội dung giới thiệu",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "instructions": "Đoạn văn giới thiệu ngắn, hiển thị ở đầu trang (căn giữa)"
+    },
+    {
+      "key": "tab_dich_vu_content_blocks",
+      "label": "📌 Nội dung chi tiết",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_content_blocks",
+      "name": "service_content_blocks",
+      "label": "Khối nội dung",
+      "type": "repeater",
+      "layout": "block",
+      "button_label": "Thêm khối nội dung",
+      "collapsed": "field_dich_vu_block_title",
+      "min": 0,
+      "max": 0,
+      "instructions": "Mỗi khối gồm hình ảnh bên trái và nội dung bên phải (tự động xen kẽ)",
+      "sub_fields": [
+        {
+          "key": "field_dich_vu_block_image",
+          "name": "image",
+          "label": "Hình ảnh",
+          "type": "image",
+          "return_format": "array"
+        },
+        {
+          "key": "field_dich_vu_block_title",
+          "name": "title",
+          "label": "Tiêu đề",
+          "type": "text"
+        },
+        {
+          "key": "field_dich_vu_block_content",
+          "name": "content",
+          "label": "Nội dung",
+          "type": "wysiwyg",
+          "toolbar": "full",
+          "media_upload": 1
+        }
+      ]
+    },
+    {
+      "key": "tab_dich_vu_related_products",
+      "label": "📌 Sản phẩm liên quan",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_related_products_title",
+      "name": "related_products_title",
+      "label": "Tiêu đề section",
+      "type": "text",
+      "default_value": "Các sản phẩm Dịch vụ"
+    },
+    {
+      "key": "field_dich_vu_related_products",
+      "name": "related_products",
+      "label": "Sản phẩm liên quan",
+      "type": "relationship",
+      "post_type": ["san-pham"],
+      "filters": ["search", "taxonomy"],
+      "return_format": "object",
+      "min": 0,
+      "max": 0,
+      "instructions": "Chọn các sản phẩm liên quan đến dịch vụ này"
+    },
+    {
+      "key": "tab_dich_vu_related_services",
+      "label": "📌 Dịch vụ liên quan",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_related_services_title",
+      "name": "related_services_title",
+      "label": "Tiêu đề section",
+      "type": "text",
+      "default_value": "Các dịch vụ liên quan"
+    },
+    {
+      "key": "field_dich_vu_related_services",
+      "name": "related_services",
+      "label": "Dịch vụ liên quan",
+      "type": "relationship",
+      "post_type": ["dich-vu"],
+      "filters": ["search"],
+      "return_format": "object",
+      "min": 0,
+      "max": 0,
+      "instructions": "Chọn các dịch vụ liên quan (để trống sẽ tự động lấy từ cùng danh mục)"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "dich-vu"
+      }
+    ]
+  ],
+  "active": true
+}

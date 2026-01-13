@@ -1,0 +1,32 @@
+{
+  "key": "group_san_pham_taxonomy",
+  "title": "Danh Mục Sản Phẩm - Fields",
+  "fields": [
+    {
+      "key": "field_san_pham_cat_image",
+      "name": "category_image",
+      "label": "Hình ảnh danh mục",
+      "type": "image",
+      "return_format": "array",
+      "instructions": "Hình ảnh đại diện cho danh mục sản phẩm, hiển thị ở trang danh mục"
+    },
+    {
+      "key": "field_san_pham_cat_banner",
+      "name": "banner_image",
+      "label": "Hình ảnh Banner",
+      "type": "image",
+      "return_format": "array",
+      "instructions": "Hình ảnh banner cho trang danh mục (nếu để trống sẽ dùng banner mặc định)"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "taxonomy",
+        "operator": "==",
+        "value": "danh-muc-san-pham"
+      }
+    ]
+  ],
+  "active": true
+}

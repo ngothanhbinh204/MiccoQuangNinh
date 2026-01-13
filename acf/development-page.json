@@ -1,0 +1,119 @@
+{
+  "key": "group_development_page",
+  "title": "Trang Phát Triển Bền Vững",
+  "fields": [
+    {
+      "key": "tab_dev_1",
+      "label": "Section 1",
+      "type": "tab"
+    },
+    {
+      "key": "field_dev_1_bg",
+      "label": "Hình nền",
+      "name": "dev_1_bg",
+      "type": "image",
+      "return_format": "url"
+    },
+    {
+      "key": "field_dev_1_title",
+      "label": "Tiêu đề",
+      "name": "dev_1_title",
+      "type": "text",
+      "default_value": "Phát Triển Bền Vững – Cam Kết Cho Tương Lai Lâu Dài"
+    },
+    {
+      "key": "field_dev_1_desc",
+      "label": "Mô tả",
+      "name": "dev_1_desc",
+      "type": "textarea",
+      "rows": 4
+    },
+    {
+      "key": "tab_dev_2",
+      "label": "Section 2",
+      "type": "tab"
+    },
+    {
+      "key": "field_dev_2_bg",
+      "label": "Hình nền (Khối nội dung)",
+      "name": "dev_2_bg",
+      "type": "image",
+      "return_format": "url"
+    },
+    {
+      "key": "field_dev_2_title",
+      "label": "Tiêu đề",
+      "name": "dev_2_title",
+      "type": "text"
+    },
+    {
+      "key": "field_dev_2_desc",
+      "label": "Mô tả",
+      "name": "dev_2_desc",
+      "type": "textarea"
+    },
+    {
+      "key": "field_dev_2_items",
+      "label": "Danh sách điểm nhấn",
+      "name": "dev_2_items",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_dev_2_item_text",
+          "label": "Nội dung",
+          "name": "text",
+          "type": "textarea",
+          "rows": 2
+        }
+      ]
+    },
+    {
+      "key": "tab_dev_3",
+      "label": "Section 3",
+      "type": "tab"
+    },
+    {
+      "key": "field_dev_3_image",
+      "label": "Hình ảnh (Phải)",
+      "name": "dev_3_image",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_dev_3_title",
+      "label": "Tiêu đề",
+      "name": "dev_3_title",
+      "type": "text"
+    },
+    {
+      "key": "field_dev_3_desc",
+      "label": "Mô tả",
+      "name": "dev_3_desc",
+      "type": "wysiwyg"
+    },
+    {
+      "key": "field_dev_3_items",
+      "label": "Danh sách điểm nhấn",
+      "name": "dev_3_items",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_dev_3_item_text",
+          "label": "Nội dung",
+          "name": "text",
+          "type": "textarea",
+          "rows": 2
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/template_phattrien.php"
+      }
+    ]
+  ]
+}

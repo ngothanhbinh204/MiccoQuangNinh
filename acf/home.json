@@ -1,0 +1,297 @@
+{
+  "key": "group_home",
+  "title": "Trang chủ - Content Fields",
+  "fields": [
+    {
+      "key": "tab_home_1",
+      "label": "Banner Slider",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_1_enable",
+      "name": "home_1_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_1_slides",
+      "name": "home_1_slides",
+      "label": "Banner Slides",
+      "type": "repeater",
+      "layout": "block",
+      "button_label": "Thêm slide",
+      "collapsed": "field_home_1_slide_title",
+      "min": 0,
+      "max": 0,
+      "sub_fields": [
+        {
+          "key": "field_home_1_slide_image",
+          "name": "image",
+          "label": "Hình ảnh",
+          "type": "image",
+          "return_format": "array"
+        },
+        {
+          "key": "field_home_1_slide_title",
+          "name": "title",
+          "label": "Tiêu đề",
+          "type": "text"
+        },
+        {
+          "key": "field_home_1_slide_link",
+          "name": "link",
+          "label": "Link",
+          "type": "link",
+          "return_format": "array"
+        }
+      ]
+    },
+    {
+      "key": "tab_home_2",
+      "label": "Về Chúng Tôi",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_2_enable",
+      "name": "home_2_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_2_title",
+      "name": "home_2_title",
+      "label": "Tiêu đề",
+      "type": "text"
+    },
+    {
+      "key": "field_home_2_content",
+      "name": "home_2_content",
+      "label": "Nội dung",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_home_2_button",
+      "name": "home_2_button",
+      "label": "Nút xem chi tiết",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "field_home_2_stats",
+      "name": "home_2_stats",
+      "label": "Thống kê",
+      "type": "repeater",
+      "layout": "table",
+      "button_label": "Thêm thống kê",
+      "collapsed": "field_home_2_stat_title",
+      "min": 0,
+      "max": 0,
+      "sub_fields": [
+        {
+          "key": "field_home_2_stat_icon",
+          "name": "icon",
+          "label": "Icon",
+          "type": "image",
+          "return_format": "array"
+        },
+        {
+          "key": "field_home_2_stat_number",
+          "name": "number",
+          "label": "Số",
+          "type": "number"
+        },
+        {
+          "key": "field_home_2_stat_suffix",
+          "name": "suffix",
+          "label": "Hậu tố",
+          "type": "text"
+        },
+        {
+          "key": "field_home_2_stat_title",
+          "name": "title",
+          "label": "Tiêu đề",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "key": "tab_home_3",
+      "label": "Sản Phẩm",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_3_enable",
+      "name": "home_3_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_3_background_image",
+      "name": "home_3_background_image",
+      "label": "Hình nền",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_home_3_title",
+      "name": "home_3_title",
+      "label": "Tiêu đề",
+      "type": "text"
+    },
+    {
+      "key": "field_home_3_products",
+      "name": "home_3_products",
+      "label": "Sản phẩm",
+      "type": "relationship",
+      "post_type": [
+        "san-pham"
+      ],
+      "filters": [
+        "search",
+        "taxonomy"
+      ],
+      "return_format": "object",
+      "min": 0,
+      "max": 0
+    },
+    {
+      "key": "tab_home_4",
+      "label": "Dịch Vụ",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_4_enable",
+      "name": "home_4_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_4_title",
+      "name": "home_4_title",
+      "label": "Tiêu đề",
+      "type": "text"
+    },
+    {
+      "key": "field_home_4_services",
+      "name": "home_4_services",
+      "label": "Dịch vụ",
+      "type": "relationship",
+      "post_type": [
+        "dich-vu"
+      ],
+      "filters": [
+        "search",
+        "taxonomy"
+      ],
+      "return_format": "object",
+      "min": 0,
+      "max": 0
+    },
+    {
+      "key": "tab_home_5",
+      "label": "Tin Tức - Sự Kiện",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_5_enable",
+      "name": "home_5_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_5_title",
+      "name": "home_5_title",
+      "label": "Tiêu đề",
+      "type": "text"
+    },
+    {
+      "key": "field_home_5_categories",
+      "name": "home_5_categories",
+      "label": "Chọn danh mục",
+      "type": "taxonomy",
+      "taxonomy": "category",
+      "field_type": "checkbox",
+      "return_format": "id",
+      "multiple": 1
+    },
+    {
+      "key": "field_home_5_posts_per_category",
+      "name": "home_5_posts_per_category",
+      "label": "Số bài viết mỗi danh mục",
+      "type": "number",
+      "default_value": 5,
+      "min": 1,
+      "max": 20
+    },
+    {
+      "key": "field_home_5_button",
+      "name": "home_5_button",
+      "label": "Nút xem tất cả",
+      "type": "link",
+      "return_format": "array"
+    },
+    {
+      "key": "tab_home_6",
+      "label": "Phát Triển Bền Vững",
+      "type": "tab"
+    },
+    {
+      "key": "field_home_6_enable",
+      "name": "home_6_enable",
+      "label": "Hiển thị section",
+      "type": "true_false",
+      "default_value": 1,
+      "ui": 1
+    },
+    {
+      "key": "field_home_6_background_image",
+      "name": "home_6_background_image",
+      "label": "Hình nền",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_home_6_title",
+      "name": "home_6_title",
+      "label": "Tiêu đề",
+      "type": "text"
+    },
+    {
+      "key": "field_home_6_content",
+      "name": "home_6_content",
+      "label": "Nội dung",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_home_6_button",
+      "name": "home_6_button",
+      "label": "Nút xem chi tiết",
+      "type": "link",
+      "return_format": "array"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/template_home.php"
+      }
+    ]
+  ],
+  "active": true
+}

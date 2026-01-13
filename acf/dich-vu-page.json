@@ -1,0 +1,54 @@
+{
+  "key": "group_dich_vu_page",
+  "title": "Trang Dịch Vụ - Content Fields",
+  "fields": [
+    {
+      "key": "tab_dich_vu_intro",
+      "label": "📌 Giới thiệu",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_page_title",
+      "name": "page_title",
+      "label": "Tiêu đề trang",
+      "type": "text",
+      "default_value": "Dịch vụ"
+    },
+    {
+      "key": "field_dich_vu_page_description",
+      "name": "page_description",
+      "label": "Mô tả trang",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "instructions": "Mô tả ngắn về dịch vụ, hiển thị ở phần đầu trang"
+    },
+    {
+      "key": "tab_dich_vu_featured",
+      "label": "📌 Dịch vụ nổi bật",
+      "type": "tab"
+    },
+    {
+      "key": "field_dich_vu_featured_services",
+      "name": "featured_services",
+      "label": "Dịch vụ nổi bật (Slider)",
+      "type": "relationship",
+      "post_type": ["dich-vu"],
+      "filters": ["search"],
+      "return_format": "object",
+      "min": 0,
+      "max": 10,
+      "instructions": "Chọn các dịch vụ nổi bật để hiển thị trên slider"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/template_dich_vu.php"
+      }
+    ]
+  ],
+  "active": true
+}

@@ -8,9 +8,9 @@ function register_my_menu()
 	$locations = array(
 		'header-top' => __('Menu top', 'canhcamtheme'),
 		'header-menu' => __('Menu chính', 'canhcamtheme'),
-		'footer-1' => __('Footer 1', 'canhcamtheme'),
-		'footer-2' => __('Footer 2', 'canhcamtheme'),
-		'footer-3' => __('Footer 3', 'canhcamtheme'),
+		'footer-1' => __('Menu Footer Liên Kết nhanh', 'canhcamtheme'),
+		'footer-2' => __('Menu Footer Social', 'canhcamtheme'),
+		'footer-3' => __('Menu Sitemap', 'canhcamtheme'),
 		'footer-4' => __('Footer 4', 'canhcamtheme'),
 	);
 	register_nav_menus($locations);

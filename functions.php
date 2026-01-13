@@ -8,182 +8,6 @@ require get_template_directory() . '/inc/function-setup.php';
 require get_template_directory() . '/inc/function-post-types.php';
 
 /**
- * Set custom posts per page for du-an-category taxonomy
- * If highlighted projects exist, set to 3, otherwise keep default
- */
-function custom_du_an_posts_per_page($query) {
-    // Only modify main query on frontend
-    if (!is_admin() && $query->is_main_query()) {
-        // Check if this is a du-an-category taxonomy query by checking query vars
-        $is_du_an_category = false;
-        $term_slug = '';
-        
-        // Check if taxonomy query var is set
-        if (isset($query->query_vars['taxonomy']) && $query->query_vars['taxonomy'] === 'du-an-category') {
-            $is_du_an_category = true;
-            $term_slug = isset($query->query_vars['term']) ? $query->query_vars['term'] : '';
-        }
-        // Check if taxonomy slug is used as query var (WordPress sometimes does this)
-        elseif (isset($query->query_vars['du-an-category'])) {
-            $is_du_an_category = true;
-            $term_slug = $query->query_vars['du-an-category'];
-        }
-        
-        if ($is_du_an_category && $term_slug) {
-            // Get term by slug
-            $term = get_term_by('slug', $term_slug, 'du-an-category');
-            
-            // Default: set posts per page to 6 when no highlighted projects
-            $has_highlighted = false;
-            
-            // Check if highlighted projects exist
-            if ($term && !is_wp_error($term)) {
-                $highlighted_projects = get_field('highlight_project', $term);
-                if(!$highlighted_projects || (is_array($highlighted_projects) && empty($highlighted_projects))) {
-                    $highlighted_projects = get_field('highlight_project', $term->taxonomy . '_' . $term->term_id);
-                }
-                
-                // If highlighted projects exist, set posts per page to 3 and exclude them from query
-                if($highlighted_projects && !empty($highlighted_projects)) {
-                    // Handle both array and single post object
-                    if(!is_array($highlighted_projects)) {
-                        $highlighted_projects = array($highlighted_projects);
-                    }
-                    
-                    // Collect highlighted project IDs to exclude from query
-                    $highlighted_ids = array();
-                    $has_valid_projects = false;
-                    
-                    foreach($highlighted_projects as $project) {
-                        $post_obj = null;
-                        $post_id = null;
-                        
-                        // Handle different formats: post ID, post object, or WP_Post object
-                        if(is_numeric($project)) {
-                            $post_id = intval($project);
-                            $post_obj = get_post($post_id);
-                        } elseif(is_object($project)) {
-                            if(isset($project->ID)) {
-                                $post_id = intval($project->ID);
-                                $post_obj = $project;
-                            } elseif(isset($project->post_type)) {
-                                $post_obj = $project;
-                                $post_id = isset($project->ID) ? intval($project->ID) : null;
-                            }
-                        } elseif(is_string($project) && is_numeric($project)) {
-                            $post_id = intval($project);
-                            $post_obj = get_post($post_id);
-                        }
-                        
-                        if($post_obj && $post_obj->post_type === 'du-an' && $post_id) {
-                            $highlighted_ids[] = $post_id;
-                            $has_valid_projects = true;
-                        }
-                    }
-                    
-                    if($has_valid_projects && !empty($highlighted_ids)) {
-                        // Exclude highlighted projects from query
-                        $query->set('post__not_in', $highlighted_ids);
-                        // Set posts per page to 3
-                        $query->set('posts_per_page', 6);
-                        $has_highlighted = true;
-                        return; // Exit early
-                    }
-                }
-            }
-            
-            // If no highlighted projects, set posts per page to 6 (slider posts will be handled separately in template)
-            if(!$has_highlighted) {
-                $query->set('posts_per_page', 6);
-            }
-        }
-    }
-}
-add_action('pre_get_posts', 'custom_du_an_posts_per_page');
-
-/**
- * Fallback: Set custom posts per page using parse_query hook
- * This fires after query is parsed, so we can use get_queried_object()
- */
-function custom_du_an_posts_per_page_fallback($query) {
-    // Only modify main query on frontend
-    if (!is_admin() && $query->is_main_query()) {
-        // Check if posts_per_page was already set (by pre_get_posts hook)
-        if ($query->get('posts_per_page') == 6) {
-            return; // Already set, skip
-        }
-        
-        // Try to get queried object (works in parse_query)
-        $term = get_queried_object();
-        
-        // Default: set posts per page to 6 when no highlighted projects
-        $has_highlighted = false;
-        
-        // Check if this is a du-an-category term
-        if ($term && !is_wp_error($term) && isset($term->taxonomy) && $term->taxonomy === 'du-an-category') {
-            $highlighted_projects = get_field('highlight_project', $term);
-            if(!$highlighted_projects || (is_array($highlighted_projects) && empty($highlighted_projects))) {
-                $highlighted_projects = get_field('highlight_project', $term->taxonomy . '_' . $term->term_id);
-            }
-            
-            // If highlighted projects exist, set posts per page to 3 and exclude them from query
-            if($highlighted_projects && !empty($highlighted_projects)) {
-                // Handle both array and single post object
-                if(!is_array($highlighted_projects)) {
-                    $highlighted_projects = array($highlighted_projects);
-                }
-                
-                // Collect highlighted project IDs to exclude from query
-                $highlighted_ids = array();
-                $has_valid_projects = false;
-                
-                foreach($highlighted_projects as $project) {
-                    $post_obj = null;
-                    $post_id = null;
-                    
-                    // Handle different formats: post ID, post object, or WP_Post object
-                    if(is_numeric($project)) {
-                        $post_id = intval($project);
-                        $post_obj = get_post($post_id);
-                    } elseif(is_object($project)) {
-                        if(isset($project->ID)) {
-                            $post_id = intval($project->ID);
-                            $post_obj = $project;
-                        } elseif(isset($project->post_type)) {
-                            $post_obj = $project;
-                            $post_id = isset($project->ID) ? intval($project->ID) : null;
-                        }
-                    } elseif(is_string($project) && is_numeric($project)) {
-                        $post_id = intval($project);
-                        $post_obj = get_post($post_id);
-                    }
-                    
-                    if($post_obj && $post_obj->post_type === 'du-an' && $post_id) {
-                        $highlighted_ids[] = $post_id;
-                        $has_valid_projects = true;
-                    }
-                }
-                
-                if($has_valid_projects && !empty($highlighted_ids)) {
-                    // Exclude highlighted projects from query
-                    $query->set('post__not_in', $highlighted_ids);
-                    // Set posts per page to 3
-                    $query->set('posts_per_page', 6);
-                    $has_highlighted = true;
-                }
-            }
-        }
-        
-        // If no highlighted projects, set posts per page to 6 (slider posts will be handled separately in template)
-        if(!$has_highlighted) {
-            $query->set('posts_per_page', 6);
-        }
-    }
-}
-add_action('parse_query', 'custom_du_an_posts_per_page_fallback');
-
-
-/**
  * Validate phone number field in Contact Form 7
  * Ensures the phone number contains only digits and is between 10-12 characters
  */
@@ -535,4 +359,22 @@ add_action( 'after_switch_theme', 'flush_rewrite_rules' );
 // add_action( 'init', function() { flush_rewrite_rules(); }, 999 );
 
 
+add_filter('rank_math/frontend/breadcrumb/items', function ($crumbs) {
+
+    if (is_singular('dich-vu')) {
+
+        $crumbs = [
+            [
+                __('Trang chủ', 'canhcamtheme'),
+                home_url('/'),
+            ],
+            [
+                __('Dịch vụ', 'canhcamtheme'),
+                get_post_type_archive_link('dich-vu'),
+            ],
+        ];
+    }
+
+    return $crumbs;
+});
 

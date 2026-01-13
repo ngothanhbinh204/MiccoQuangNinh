@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html <?= language_attributes() ?>>
+<html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="UTF-8">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,107 +11,60 @@
 	<?php if (stripos($_SERVER['HTTP_USER_AGENT'], 'Chrome-Lighthouse') === false): ?>
 	<?php endif; ?>
 	<?php wp_head(); ?>
-	<?= get_field('field_config_head', 'options') ?>
-		<?php
-
-
-
-	$header_options = get_field('header_options', 'option');
-
-	$header_social = isset($header_options['header_social']) ? $header_options['header_social'] : '';
-
-
-
-	?>
-
-
+	<?php echo get_field('field_config_head', 'options'); ?>
 </head>
 
-<body <?php body_class(get_field('add_class_body', get_the_ID())) ?>>
-	<header class="fixed z-999 top-0 left-0 right-0 w-full transition max-xl:bg-white " id="header">
-		<div class="container relative flex-between z-50 h-full">
-			<div class="header-left relative z-40 flex-start">
-				<div class="site-menu-toggle relative z-100" tabindex="-1" aria-label="Toggle Site Menu">
-					<div class="hamburger hamburger--elastic relative z-50">
-						<div class="hamburger-box">
-							<div class="hamburger-inner"></div>
-						</div>
+<body <?php body_class(get_field('add_class_body', get_the_ID())); ?>>
+	<header class="header">
+		<div class="container">
+			<div class="header-wrapper">
+				<div class="header-logo">
+					<?php
+					if (has_custom_logo()) {
+						the_custom_logo();
+					} else {
+						echo '<a href="' . home_url() . '" alt="logo"><img src="' . get_template_directory_uri() . '/img/logo.png" alt="' . get_bloginfo('name') . '" /></a>';
+					}
+					?>
+				</div>
+				<div class="header-right">
+					<div class="header-menu">
+						<?php
+						wp_nav_menu(array(
+							'theme_location' => 'header-menu',
+							'container'      => false,
+							'menu_class'     => 'header-nav',
+							'items_wrap'     => '<ul id="%1$s" class="%2$s"><li><a href="' . home_url() . '"><i class="fa-solid fa-house"></i></a></li>%3$s</ul>',
+							'fallback_cb'    => false,
+						));
+						?>
 					</div>
-					<div class="menu-overlay"></div>
-				</div>
-				<div class="search-wrap relative z-50 ml-6">
-					<div class="search-toggle"></div>
-				</div>
-			</div>
-			<div class="nav-brand z-50 pointer-events-auto z-50">
-				<?php echo get_custom_logo(); ?>
-			</div>
-			<div class="header-right relative z-40">
-				<div class="language-wrap">
-					<div class="wpml-ls wpml-ls-legacy-list-horizontal wpml-ls-statics-shortcode_actions">
-						<?php echo do_shortcode('[wpml_language_selector_widget]'); ?>
+					<div class="header-right-inner">
+						<div class="header-language">
+							<?php echo do_shortcode('[wpml_language_selector_widget]'); ?>
+						</div>
+						<div class="header-search"> <img class="img-svg"
+								src="<?php echo get_template_directory_uri(); ?>/img/search.svg" alt="search"></div>
+						<div class="header-bar"><i class="fa-solid fa-bars"></i></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
-
-
-
-	<form class="searchbox" action="<?php bloginfo('url') ?>/" method="GET" role="form">
-		<div class="search-overlay">
-			<div class="container">
-				<input class="w-full" name="s" class="form-control" type="text"
-					placeholder="<?php _e('Tìm kiếm', 'canhcamtheme'); ?>">
-
-
-
-				<button type="submit" tabindex="-1" aria-label="Search Button"><em
-						class="fa-regular fa-magnifying-glass"></em></button>
-
-			</div>
+	<div class="header-overlay"></div>
+	<div class="header-search-form">
+		<div
+			class="close flex items-center justify-center absolute top-0 right-0 bg-white text-3xl cursor-pointer w-12.5 h-12.5">
+			<i class="fa-light fa-xmark"></i>
 		</div>
-	</form>
-
-	<div class="mobile-nav-wrap">
-		<div class="block-wrap">
-			<div class="scrollbar-wrap white">
-				<nav class="nav-primary-menu">
-					<?php
-					wp_nav_menu(array(
-						'theme_location' => 'header-menu',
-						'menu_id' => 'menu-site-menu',
-						'container' => false,
-						'menu_class' => 'nav',
-					));
-					?>
-				</nav>
-			</div>
-			<div class="header-social">
-				<div class="social pt-10 lg:pt-15">
-					<div class="wrap flex-center  lg:flex-start rem:gap-[12px]">
-
-						<?php foreach ($header_social as $item): 
-							
-							
-							?>
-
-
-
-							<a rel="noopener noreferrer" target="_blank" <?php if (!empty($item['link']))
-								echo 'href="' . $item['link'] . '"'; ?>>
-								<?php if (!empty($item['icon'])): ?>
-									<?= $item['icon'] ?>
-								<?php elseif (!empty($item['image'])): ?>
-
-									<?php echo wp_get_attachment_image($item['image'], 'full', array('class' => 'img-wp')); ?>
-
-								<?php endif; ?>
-							</a>
-						<?php endforeach; ?>
-
+		<div class="container">
+			<div class="wrap-form-search-product">
+				<form action="<?php echo home_url(); ?>/" method="GET" role="form">
+					<div class="productsearchbox">
+						<input type="text" name="s" placeholder="<?php _e('Tìm kiếm thông tin', 'canhcamtheme'); ?>">
+						<button type="submit"><i class="fa-light fa-magnifying-glass"></i></button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>

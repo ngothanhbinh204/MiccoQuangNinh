@@ -29,7 +29,6 @@ function canhcam_style()
 	 */
 	wp_enqueue_style('frontend-style-google-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap', array(), GENERATE_VERSION);
 	wp_enqueue_style('frontend-style-global', THEME_URI . '/styles/core.min.css', array(), GENERATE_VERSION);
-	wp_enqueue_style('frontend-style-tailwind', THEME_URI . '/styles/tailwind.min.css', array(), GENERATE_VERSION);
 	wp_enqueue_style('frontend-style-main', THEME_URI . '/styles/main.min.css', array(), GENERATE_VERSION);
 	
 

@@ -1,0 +1,32 @@
+{
+  "key": "group_dich_vu_taxonomy",
+  "title": "Danh Mục Dịch Vụ - Fields",
+  "fields": [
+    {
+      "key": "field_dich_vu_cat_image",
+      "name": "category_image",
+      "label": "Hình ảnh danh mục",
+      "type": "image",
+      "return_format": "array",
+      "instructions": "Hình ảnh đại diện cho danh mục dịch vụ"
+    },
+    {
+      "key": "field_dich_vu_cat_banner",
+      "name": "banner_image",
+      "label": "Hình ảnh Banner",
+      "type": "image",
+      "return_format": "array",
+      "instructions": "Hình ảnh banner cho trang danh mục (nếu để trống sẽ dùng banner mặc định)"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "taxonomy",
+        "operator": "==",
+        "value": "danh-muc-dich-vu"
+      }
+    ]
+  ],
+  "active": true
+}

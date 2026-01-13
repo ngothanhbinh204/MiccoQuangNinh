@@ -1,5 +1,196 @@
 <?php
-// Register Tuyển Dụng Custom Post Type
+/**
+ * Custom Post Types for Micco Quang Ninh
+ * 
+ * Post Types:
+ * - san-pham (Sản phẩm / Products)
+ * - dich-vu (Dịch vụ / Services)
+ * - tuyen-dung (Tuyển dụng / Recruitment)
+ */
+
+// ============================================================================
+// REGISTER SẢN PHẨM (PRODUCTS) POST TYPE
+// ============================================================================
+function create_san_pham_post_type() {
+    $labels = array(
+        'name'                  => 'Sản Phẩm',
+        'singular_name'         => 'Sản Phẩm',
+        'menu_name'             => 'Sản Phẩm',
+        'name_admin_bar'        => 'Sản Phẩm',
+        'archives'              => 'Danh sách Sản Phẩm',
+        'attributes'            => 'Thuộc tính Sản Phẩm',
+        'parent_item_colon'     => 'Sản Phẩm cha:',
+        'all_items'             => 'Tất cả Sản Phẩm',
+        'add_new_item'          => 'Thêm Sản Phẩm mới',
+        'add_new'               => 'Thêm mới',
+        'new_item'              => 'Sản Phẩm mới',
+        'edit_item'             => 'Sửa Sản Phẩm',
+        'update_item'           => 'Cập nhật Sản Phẩm',
+        'view_item'             => 'Xem Sản Phẩm',
+        'view_items'            => 'Xem các Sản Phẩm',
+        'search_items'          => 'Tìm kiếm Sản Phẩm',
+        'not_found'             => 'Không tìm thấy',
+        'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
+        'featured_image'        => 'Ảnh đại diện',
+        'set_featured_image'    => 'Đặt ảnh đại diện',
+        'remove_featured_image' => 'Xóa ảnh đại diện',
+        'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
+        'insert_into_item'      => 'Chèn vào Sản Phẩm',
+        'uploaded_to_this_item' => 'Đã tải lên cho Sản Phẩm này',
+        'items_list'            => 'Danh sách Sản Phẩm',
+        'items_list_navigation' => 'Điều hướng danh sách Sản Phẩm',
+        'filter_items_list'     => 'Lọc danh sách Sản Phẩm',
+    );
+    
+    $args = array(
+        'labels'              => $labels,
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'query_var'           => true,
+        'rewrite'             => array('slug' => 'san-pham', 'with_front' => false),
+        'capability_type'     => 'post',
+        'has_archive'         => true,
+        'hierarchical'        => false,
+        'menu_position'       => 5,
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'menu_icon'           => 'dashicons-products',
+        'show_in_rest'        => true,
+    );
+
+    register_post_type('san-pham', $args);
+}
+add_action('init', 'create_san_pham_post_type');
+
+// Register Danh Mục Sản Phẩm Taxonomy
+function create_san_pham_taxonomy() {
+    $labels = array(
+        'name'                       => 'Danh Mục Sản Phẩm',
+        'singular_name'              => 'Danh Mục Sản Phẩm',
+        'search_items'               => 'Tìm kiếm Danh Mục',
+        'popular_items'              => 'Danh Mục phổ biến',
+        'all_items'                  => 'Tất cả Danh Mục',
+        'parent_item'                => 'Danh Mục cha',
+        'parent_item_colon'          => 'Danh Mục cha:',
+        'edit_item'                  => 'Sửa Danh Mục',
+        'update_item'                => 'Cập nhật Danh Mục',
+        'add_new_item'               => 'Thêm Danh Mục mới',
+        'new_item_name'              => 'Tên Danh Mục mới',
+        'separate_items_with_commas' => 'Phân tách các Danh Mục bằng dấu phẩy',
+        'add_or_remove_items'        => 'Thêm hoặc xóa Danh Mục',
+        'choose_from_most_used'      => 'Chọn từ các Danh Mục được sử dụng nhiều nhất',
+        'not_found'                  => 'Không tìm thấy Danh Mục',
+        'menu_name'                  => 'Danh Mục Sản Phẩm',
+    );
+
+    $args = array(
+        'hierarchical'          => true,
+        'labels'                => $labels,
+        'show_ui'               => true,
+        'show_admin_column'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => 'danh-muc-san-pham'),
+        'show_in_rest'          => true,
+    );
+
+    register_taxonomy('danh-muc-san-pham', array('san-pham'), $args);
+}
+add_action('init', 'create_san_pham_taxonomy');
+
+// ============================================================================
+// REGISTER DỊCH VỤ (SERVICES) POST TYPE
+// ============================================================================
+function create_dich_vu_post_type() {
+    $labels = array(
+        'name'                  => 'Dịch Vụ',
+        'singular_name'         => 'Dịch Vụ',
+        'menu_name'             => 'Dịch Vụ',
+        'name_admin_bar'        => 'Dịch Vụ',
+        'archives'              => 'Danh sách Dịch Vụ',
+        'attributes'            => 'Thuộc tính Dịch Vụ',
+        'parent_item_colon'     => 'Dịch Vụ cha:',
+        'all_items'             => 'Tất cả Dịch Vụ',
+        'add_new_item'          => 'Thêm Dịch Vụ mới',
+        'add_new'               => 'Thêm mới',
+        'new_item'              => 'Dịch Vụ mới',
+        'edit_item'             => 'Sửa Dịch Vụ',
+        'update_item'           => 'Cập nhật Dịch Vụ',
+        'view_item'             => 'Xem Dịch Vụ',
+        'view_items'            => 'Xem các Dịch Vụ',
+        'search_items'          => 'Tìm kiếm Dịch Vụ',
+        'not_found'             => 'Không tìm thấy',
+        'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
+        'featured_image'        => 'Ảnh đại diện',
+        'set_featured_image'    => 'Đặt ảnh đại diện',
+        'remove_featured_image' => 'Xóa ảnh đại diện',
+        'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
+        'insert_into_item'      => 'Chèn vào Dịch Vụ',
+        'uploaded_to_this_item' => 'Đã tải lên cho Dịch Vụ này',
+        'items_list'            => 'Danh sách Dịch Vụ',
+        'items_list_navigation' => 'Điều hướng danh sách Dịch Vụ',
+        'filter_items_list'     => 'Lọc danh sách Dịch Vụ',
+    );
+    
+    $args = array(
+        'labels'              => $labels,
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'query_var'           => true,
+        'rewrite'             => array('slug' => 'dich-vu', 'with_front' => false),
+        'capability_type'     => 'post',
+        'has_archive'         => true,
+        'hierarchical'        => false,
+        'menu_position'       => 6,
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'menu_icon'           => 'dashicons-admin-tools',
+        'show_in_rest'        => true,
+    );
+
+    register_post_type('dich-vu', $args);
+}
+add_action('init', 'create_dich_vu_post_type');
+
+// Register Danh Mục Dịch Vụ Taxonomy
+function create_dich_vu_taxonomy() {
+    $labels = array(
+        'name'                       => 'Danh Mục Dịch Vụ',
+        'singular_name'              => 'Danh Mục Dịch Vụ',
+        'search_items'               => 'Tìm kiếm Danh Mục',
+        'popular_items'              => 'Danh Mục phổ biến',
+        'all_items'                  => 'Tất cả Danh Mục',
+        'parent_item'                => 'Danh Mục cha',
+        'parent_item_colon'          => 'Danh Mục cha:',
+        'edit_item'                  => 'Sửa Danh Mục',
+        'update_item'                => 'Cập nhật Danh Mục',
+        'add_new_item'               => 'Thêm Danh Mục mới',
+        'new_item_name'              => 'Tên Danh Mục mới',
+        'separate_items_with_commas' => 'Phân tách các Danh Mục bằng dấu phẩy',
+        'add_or_remove_items'        => 'Thêm hoặc xóa Danh Mục',
+        'choose_from_most_used'      => 'Chọn từ các Danh Mục được sử dụng nhiều nhất',
+        'not_found'                  => 'Không tìm thấy Danh Mục',
+        'menu_name'                  => 'Danh Mục Dịch Vụ',
+    );
+
+    $args = array(
+        'hierarchical'          => true,
+        'labels'                => $labels,
+        'show_ui'               => true,
+        'show_admin_column'     => true,
+        'query_var'             => true,
+        'rewrite'               => array('slug' => 'danh-muc-dich-vu'),
+        'show_in_rest'          => true,
+    );
+
+    register_taxonomy('danh-muc-dich-vu', array('dich-vu'), $args);
+}
+add_action('init', 'create_dich_vu_taxonomy');
+
+// ============================================================================
+// REGISTER TUYỂN DỤNG (RECRUITMENT) POST TYPE
+// ============================================================================
 function create_tuyen_dung_post_type() {
     $labels = array(
         'name'                  => 'Tuyển Dụng',
@@ -86,190 +277,19 @@ function create_danh_muc_tuyen_dung_taxonomy() {
 }
 add_action('init', 'create_danh_muc_tuyen_dung_taxonomy');
 
-// Register Dự Án Custom Post Type
-function create_du_an_post_type() {
-    $labels = array(
-        'name'                  => 'Dự Án',
-        'singular_name'         => 'Dự Án',
-        'menu_name'             => 'Dự Án',
-        'name_admin_bar'        => 'Dự Án',
-        'archives'              => 'Lưu trữ Dự Án',
-        'attributes'            => 'Thuộc tính Dự Án',
-        'parent_item_colon'     => 'Dự Án cha:',
-        'all_items'             => 'Tất cả Dự Án',
-        'add_new_item'          => 'Thêm Dự Án mới',
-        'add_new'               => 'Thêm mới',
-        'new_item'              => 'Dự Án mới',
-        'edit_item'             => 'Sửa Dự Án',
-        'update_item'           => 'Cập nhật Dự Án',
-        'view_item'             => 'Xem Dự Án',
-        'view_items'            => 'Xem các Dự Án',
-        'search_items'          => 'Tìm kiếm Dự Án',
-        'not_found'             => 'Không tìm thấy',
-        'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
-        'featured_image'        => 'Ảnh đại diện',
-        'set_featured_image'    => 'Đặt ảnh đại diện',
-        'remove_featured_image' => 'Xóa ảnh đại diện',
-        'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
-        'insert_into_item'      => 'Chèn vào Dự Án',
-        'uploaded_to_this_item' => 'Đã tải lên cho Dự Án này',
-        'items_list'            => 'Danh sách Dự Án',
-        'items_list_navigation' => 'Điều hướng danh sách Dự Án',
-        'filter_items_list'     => 'Lọc danh sách Dự Án',
-    );
-    
-    $args = array(
-        'labels'              => $labels,
-        'public'              => true,
-        'publicly_queryable'  => true,
-        'show_ui'             => true,
-        'show_in_menu'        => true,
-        'query_var'           => true,
-        'rewrite'             => array('slug' => 'du-an'),
-        'capability_type'     => 'post',
-        'has_archive'         => false,
-        'hierarchical'        => false,
-        'menu_position'       => null,
-        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt'),
-        'menu_icon'           => 'dashicons-portfolio',
-    );
-
-    register_post_type('du-an', $args);
-}
-add_action('init', 'create_du_an_post_type');
-
-/**
- * Register taxonomy for Dự Án
- */
-function create_du_an_taxonomy() {
-    $labels = array(
-        'name'              => 'Danh mục Dự Án',
-        'singular_name'     => 'Danh mục Dự Án',
-        'search_items'      => 'Tìm kiếm danh mục',
-        'all_items'         => 'Tất cả danh mục',
-        'parent_item'       => 'Danh mục cha',
-        'parent_item_colon' => 'Danh mục cha:',
-        'edit_item'         => 'Sửa danh mục',
-        'update_item'       => 'Cập nhật danh mục',
-        'add_new_item'      => 'Thêm danh mục mới',
-        'new_item_name'     => 'Tên danh mục mới',
-        'menu_name'         => 'Danh mục Dự Án',
-    );
-
-    $args = array(
-        'labels'            => $labels,
-        'hierarchical'      => true,
-        'public'            => true,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'show_in_nav_menus' => true,
-        'query_var'         => true,
-        'rewrite'           => array('slug' => 'du-an-category'),
-    );
-
-    register_taxonomy('du-an-category', array('du-an'), $args);
-}
-add_action('init', 'create_du_an_taxonomy');
-
-// Register Văn Hóa Doanh Nghiệp Custom Post Type
-function create_van_hoa_doanh_nghiep_post_type() {
-    $labels = array(
-        'name'                  => 'Văn Hóa Doanh Nghiệp',
-        'singular_name'         => 'Văn Hóa Doanh Nghiệp',
-        'menu_name'             => 'Văn Hóa Doanh Nghiệp',
-        'name_admin_bar'        => 'Văn Hóa Doanh Nghiệp',
-        'archives'              => 'Lưu trữ Văn Hóa Doanh Nghiệp',
-        'attributes'            => 'Thuộc tính Văn Hóa Doanh Nghiệp',
-        'parent_item_colon'     => 'Văn Hóa Doanh Nghiệp cha:',
-        'all_items'             => 'Tất cả Văn Hóa Doanh Nghiệp',
-        'add_new_item'          => 'Thêm Văn Hóa Doanh Nghiệp mới',
-        'add_new'               => 'Thêm mới',
-        'new_item'              => 'Văn Hóa Doanh Nghiệp mới',
-        'edit_item'             => 'Sửa Văn Hóa Doanh Nghiệp',
-        'update_item'           => 'Cập nhật Văn Hóa Doanh Nghiệp',
-        'view_item'             => 'Xem Văn Hóa Doanh Nghiệp',
-        'view_items'            => 'Xem các Văn Hóa Doanh Nghiệp',
-        'search_items'          => 'Tìm kiếm Văn Hóa Doanh Nghiệp',
-        'not_found'             => 'Không tìm thấy',
-        'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
-        'featured_image'        => 'Ảnh đại diện',
-        'set_featured_image'    => 'Đặt ảnh đại diện',
-        'remove_featured_image' => 'Xóa ảnh đại diện',
-        'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
-        'insert_into_item'      => 'Chèn vào Văn Hóa Doanh Nghiệp',
-        'uploaded_to_this_item' => 'Đã tải lên cho Văn Hóa Doanh Nghiệp này',
-        'items_list'            => 'Danh sách Văn Hóa Doanh Nghiệp',
-        'items_list_navigation' => 'Điều hướng danh sách Văn Hóa Doanh Nghiệp',
-        'filter_items_list'     => 'Lọc danh sách Văn Hóa Doanh Nghiệp',
-    );
-    
-    $args = array(
-        'labels'              => $labels,
-        'public'              => true,
-        'publicly_queryable'  => true,
-        'show_ui'             => true,
-        'show_in_menu'        => true,
-        'query_var'           => true,
-        'rewrite'             => array('slug' => 'van-hoa-doanh-nghiep'),
-        'capability_type'     => 'post',
-        'has_archive'         => false,
-        'hierarchical'        => false,
-        'menu_position'       => null,
-        'supports'            => array('title', 'thumbnail', 'excerpt', 'editor'),
-        'menu_icon'           => 'dashicons-groups',
-    );
-
-    register_post_type('van-hoa-doanh-nghiep', $args);
-}
-add_action('init', 'create_van_hoa_doanh_nghiep_post_type');
-
-/**
- * Register taxonomy for Văn Hóa Doanh Nghiệp
- */
-function create_van_hoa_doanh_nghiep_taxonomy() {
-    $labels = array(
-        'name'              => 'Danh mục Văn Hóa Doanh Nghiệp',
-        'singular_name'     => 'Danh mục Văn Hóa Doanh Nghiệp',
-        'search_items'      => 'Tìm kiếm danh mục',
-        'all_items'         => 'Tất cả danh mục',
-        'parent_item'       => 'Danh mục cha',
-        'parent_item_colon' => 'Danh mục cha:',
-        'edit_item'         => 'Sửa danh mục',
-        'update_item'       => 'Cập nhật danh mục',
-        'add_new_item'      => 'Thêm danh mục mới',
-        'new_item_name'     => 'Tên danh mục mới',
-        'menu_name'         => 'Danh mục Văn Hóa DN',
-    );
-
-    $args = array(
-        'labels'            => $labels,
-        'hierarchical'      => true,
-        'public'            => true,
-        'show_ui'           => true,
-        'show_admin_column' => true,
-        'show_in_nav_menus' => true,
-        'query_var'         => true,
-        'rewrite'           => array('slug' => 'van-hoa-doanh-nghiep-category'),
-    );
-
-    register_taxonomy('van-hoa-doanh-nghiep-category', array('van-hoa-doanh-nghiep'), $args);
-}
-add_action('init', 'create_van_hoa_doanh_nghiep_taxonomy');
-
-/**
- * Enable Rank Math metabox and sitemap settings for our custom taxonomies (single, robust block)
- */
+// ============================================================================
+// RANK MATH SEO INTEGRATION
+// ============================================================================
 add_action('plugins_loaded', function() {
-
     // Bail if Rank Math isn't active
     if ( ! ( defined( 'RANK_MATH_VERSION' ) || function_exists( 'rank_math' ) || class_exists( 'RankMath' ) ) ) {
         return;
     }
 
     $custom_taxonomies = array(
+        'danh-muc-san-pham',
+        'danh-muc-dich-vu',
         'tuyen-dung-category',
-        'du-an-category',
-        'van-hoa-doanh-nghiep-category',
     );
 
     // add taxonomies to Rank Math lists
@@ -295,9 +315,9 @@ add_action('plugins_loaded', function() {
     }, 20, 2 );
 });
 
-/**
- * Insert custom taxonomy term into Rank Math breadcrumbs for single CPTs.
- */
+// ============================================================================
+// BREADCRUMB INTEGRATION FOR CUSTOM POST TYPES
+// ============================================================================
 add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
 
     if ( ! is_singular() ) {
@@ -306,9 +326,9 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
 
     // Map CPT => taxonomy
     $map = array(
-        'tuyen-dung'       => 'tuyen-dung-category',
-        'du-an'       => 'du-an-category',
-        'van-hoa-doanh-nghiep'       => 'van-hoa-doanh-nghiep-category',
+        'san-pham'    => 'danh-muc-san-pham',
+        'dich-vu'     => 'danh-muc-dich-vu',
+        'tuyen-dung'  => 'tuyen-dung-category',
     );
 
     $post = get_queried_object();
@@ -331,7 +351,6 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
     }
 
     // Choose a term — currently: first in the returned array.
-    // If you need a different selection strategy (primary term), replace this block.
     $term = $terms[0];
 
     // Build breadcrumb item: [ label, url ]
@@ -340,7 +359,6 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
     // Avoid duplicates: check if already present
     foreach ( $crumbs as $c ) {
         if ( isset( $c[1] ) && untrailingslashit( $c[1] ) === untrailingslashit( $term_item[1] ) ) {
-            // term already in crumbs
             return $crumbs;
         }
     }
@@ -354,5 +372,3 @@ add_filter( 'rank_math/frontend/breadcrumb/items', function( $crumbs, $class ) {
 
     return $crumbs;
 }, 15, 2 );
-
-

@@ -1,0 +1,80 @@
+{
+  "key": "group_leader_page",
+  "title": "Trang Ban Lãnh Đạo",
+  "fields": [
+    {
+      "key": "field_leader_desc",
+      "label": "Mô tả chung",
+      "name": "leader_desc",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0
+    },
+    {
+      "key": "field_leader_tabs",
+      "label": "Danh sách các Tab (Ban/Phòng)",
+      "name": "leader_tabs",
+      "type": "repeater",
+      "layout": "block",
+      "button_label": "Thêm Tab Mới",
+      "sub_fields": [
+        {
+          "key": "field_leader_tab_title",
+          "label": "Tên Tab",
+          "name": "tab_title",
+          "type": "text",
+          "instructions": "Ví dụ: Ban Tổng Giám Đốc"
+        },
+        {
+          "key": "field_leader_tab_rows",
+          "label": "Danh sách các Hàng (Row)",
+          "name": "tab_rows",
+          "type": "repeater",
+          "layout": "block",
+          "button_label": "Thêm Hàng Mới",
+          "sub_fields": [
+             {
+              "key": "field_leader_row_items",
+              "label": "Các Nhân sự trong Hàng này",
+              "name": "row_items",
+              "type": "repeater",
+              "layout": "table",
+              "button_label": "Thêm Nhân sự",
+              "sub_fields": [
+                {
+                  "key": "field_leader_item_image",
+                  "label": "Hình ảnh",
+                  "name": "image",
+                  "type": "image",
+                  "return_format": "array",
+                  "preview_size": "medium"
+                },
+                {
+                  "key": "field_leader_item_name",
+                  "label": "Họ và tên",
+                  "name": "name",
+                  "type": "text"
+                },
+                {
+                  "key": "field_leader_item_position",
+                  "label": "Chức danh",
+                  "name": "position",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/templates_leader.php"
+      }
+    ]
+  ]
+}

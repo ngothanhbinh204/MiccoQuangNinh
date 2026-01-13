@@ -1,0 +1,73 @@
+{
+  "key": "group_san_pham_single",
+  "title": "Chi tiết Sản Phẩm - Content Fields",
+  "fields": [
+    {
+      "key": "tab_san_pham_gallery",
+      "label": "📌 Thư viện ảnh",
+      "type": "tab"
+    },
+    {
+      "key": "field_san_pham_gallery",
+      "name": "product_gallery",
+      "label": "Thư viện ảnh sản phẩm",
+      "type": "repeater",
+      "layout": "block",
+      "button_label": "Thêm ảnh",
+      "min": 0,
+      "max": 0,
+      "sub_fields": [
+        {
+          "key": "field_san_pham_gallery_image",
+          "name": "image",
+          "label": "Hình ảnh",
+          "type": "image",
+          "return_format": "array"
+        }
+      ]
+    },
+    {
+      "key": "tab_san_pham_tabs",
+      "label": "📌 Nội dung (Tabs)",
+      "type": "tab"
+    },
+    {
+      "key": "field_san_pham_tabs",
+      "name": "product_tabs",
+      "label": "Tabs nội dung",
+      "type": "repeater",
+      "layout": "block",
+      "button_label": "Thêm tab",
+      "collapsed": "field_san_pham_tab_title",
+      "min": 0,
+      "max": 0,
+      "sub_fields": [
+        {
+          "key": "field_san_pham_tab_title",
+          "name": "tab_title",
+          "label": "Tiêu đề tab",
+          "type": "text",
+          "instructions": "VD: Mô tả, An toàn, Miễn trừ trách nhiệm, Lưu ý..."
+        },
+        {
+          "key": "field_san_pham_tab_content",
+          "name": "tab_content",
+          "label": "Nội dung tab",
+          "type": "wysiwyg",
+          "toolbar": "full",
+          "media_upload": 1
+        }
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "san-pham"
+      }
+    ]
+  ],
+  "active": true
+}

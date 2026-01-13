@@ -1,0 +1,46 @@
+{
+  "key": "group_san_pham_page",
+  "title": "Trang Sản Phẩm - Content Fields",
+  "fields": [
+
+    {
+      "key": "tab_san_pham_intro",
+      "label": "📌 Giới thiệu",
+      "type": "tab"
+    },
+    {
+      "key": "field_san_pham_page_title",
+      "name": "page_title",
+      "label": "Tiêu đề trang",
+      "type": "text",
+      "default_value": "Sản phẩm"
+    },
+    {
+      "key": "field_san_pham_page_description",
+      "name": "page_description",
+      "label": "Mô tả trang",
+      "type": "wysiwyg",
+      "toolbar": "basic",
+      "media_upload": 0,
+      "instructions": "Mô tả ngắn về sản phẩm, hiển thị ở phần đầu trang"
+    },
+    {
+      "key": "field_san_pham_intro_image",
+      "name": "intro_image",
+      "label": "Hình ảnh giới thiệu",
+      "type": "image",
+      "return_format": "array",
+      "instructions": "Hình ảnh hiển thị bên phải phần giới thiệu"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/template_san_pham.php"
+      }
+    ]
+  ],
+  "active": true
+}

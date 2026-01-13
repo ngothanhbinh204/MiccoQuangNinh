@@ -1,0 +1,300 @@
+{
+  "key": "group_about_page",
+  "title": "Trang Giới Thiệu (About)",
+  "fields": [
+    {
+      "key": "tab_about_1",
+      "label": "Section 1: Về Chúng Tôi",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_1_title",
+      "label": "Tiêu đề",
+      "name": "about_1_title",
+      "type": "text",
+      "default_value": "Về Chúng Tôi"
+    },
+    {
+      "key": "field_about_1_content",
+      "label": "Nội dung",
+      "name": "about_1_content",
+      "type": "wysiwyg"
+    },
+    {
+      "key": "field_about_1_profile",
+      "label": "File Hồ sơ năng lực",
+      "name": "about_1_profile",
+      "type": "file",
+      "return_format": "url"
+    },
+    {
+      "key": "field_about_1_video",
+      "label": "Link Video (Youtube)",
+      "name": "about_1_video",
+      "type": "url"
+    },
+    {
+      "key": "field_about_1_images",
+      "label": "Hình ảnh (Chọn 2 ảnh)",
+      "name": "about_1_images",
+      "type": "gallery",
+      "min": 2,
+      "max": 2
+    },
+    {
+      "key": "tab_about_2",
+      "label": "Section 2: Tầm Nhìn",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_2_bg",
+      "label": "Hình nền",
+      "name": "about_2_bg",
+      "type": "image",
+      "return_format": "url"
+    },
+    {
+      "key": "field_about_2_title",
+      "label": "Tiêu đề",
+      "name": "about_2_title",
+      "type": "text",
+      "default_value": "Tầm Nhìn"
+    },
+    {
+      "key": "field_about_2_desc",
+      "label": "Mô tả",
+      "name": "about_2_desc",
+      "type": "textarea"
+    },
+    {
+      "key": "tab_about_3",
+      "label": "Section 3: Sứ Mệnh",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_3_image",
+      "label": "Hình ảnh",
+      "name": "about_3_image",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_about_3_title",
+      "label": "Tiêu đề",
+      "name": "about_3_title",
+      "type": "text",
+      "default_value": "Sứ Mệnh"
+    },
+    {
+      "key": "field_about_3_content",
+      "label": "Nội dung",
+      "name": "about_3_content",
+      "type": "wysiwyg"
+    },
+    {
+      "key": "tab_about_4",
+      "label": "Section 4: Triết Lý Kinh Doanh",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_4_bg",
+      "label": "Hình nền",
+      "name": "about_4_bg",
+      "type": "image",
+      "return_format": "url"
+    },
+    {
+      "key": "field_about_4_title",
+      "label": "Tiêu đề chính",
+      "name": "about_4_title",
+      "type": "text",
+      "default_value": "Triết Lý Kinh Doanh"
+    },
+    {
+      "key": "field_about_4_subtitle",
+      "label": "Tiêu đề phụ",
+      "name": "about_4_subtitle",
+      "type": "text"
+    },
+    {
+      "key": "field_about_4_items",
+      "label": "Danh sách Giá trị",
+      "name": "about_4_items",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_about_4_item_num",
+          "label": "Số (01, 02...)",
+          "name": "number",
+          "type": "text"
+        },
+        {
+          "key": "field_about_4_item_title",
+          "label": "Tiêu đề",
+          "name": "title",
+          "type": "text"
+        },
+        {
+          "key": "field_about_4_item_desc",
+          "label": "Mô tả",
+          "name": "desc",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "tab_about_5",
+      "label": "Section 5: Lịch Sử",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_5_title",
+      "label": "Tiêu đề",
+      "name": "about_5_title",
+      "type": "text",
+      "default_value": "Lịch sử hình thành"
+    },
+    {
+      "key": "field_about_5_items",
+      "label": "Các cột mốc",
+      "name": "about_5_items",
+      "type": "repeater",
+      "sub_fields": [
+        {
+          "key": "field_about_5_item_year",
+          "label": "Năm (Hiển thị trên slide trên)",
+          "name": "year",
+          "type": "text"
+        },
+        {
+          "key": "field_about_5_item_image",
+          "label": "Hình ảnh",
+          "name": "image",
+          "type": "image",
+          "return_format": "array"
+        },
+        {
+          "key": "field_about_5_item_content",
+          "label": "Nội dung chi tiết",
+          "name": "content",
+          "type": "wysiwyg"
+        }
+      ]
+    },
+    {
+      "key": "tab_about_6",
+      "label": "Section 6: Công Trình KH-KT",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_6_bg",
+      "label": "Hình nền",
+      "name": "about_6_bg",
+      "type": "image",
+      "return_format": "url"
+    },
+    {
+      "key": "field_about_6_title",
+      "label": "Tiêu đề",
+      "name": "about_6_title",
+      "type": "text"
+    },
+    {
+      "key": "field_about_6_table",
+      "label": "Bảng công trình",
+      "name": "about_6_table",
+      "type": "repeater",
+      "layout": "table",
+      "sub_fields": [
+        {
+          "key": "field_about_6_tbl_product",
+          "label": "Sản phẩm",
+          "name": "product",
+          "type": "post_object",
+          "post_type": ["san-pham"],
+          "return_format": "object"
+        },
+        {
+          "key": "field_about_6_tbl_year",
+          "label": "Năm",
+          "name": "year",
+          "type": "text"
+        },
+        {
+          "key": "field_about_6_tbl_meaning",
+          "label": "Ý nghĩa",
+          "name": "meaning",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "key": "field_about_6_heritage_title",
+      "label": "Tiêu đề (Dấu ấn)",
+      "name": "about_6_heritage_title",
+      "type": "text",
+      "default_value": "Dấu ấn Di sản Quốc gia"
+    },
+    {
+      "key": "field_about_6_heritage_content",
+      "label": "Nội dung (Dấu ấn)",
+      "name": "about_6_heritage_content",
+      "type": "wysiwyg"
+    },
+    {
+      "key": "field_about_6_heritage_image",
+      "label": "Hình ảnh (Dấu ấn)",
+      "name": "about_6_heritage_image",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "tab_about_7",
+      "label": "Section 7: Phát Triển Bền Vững",
+      "type": "tab"
+    },
+    {
+      "key": "field_about_7_title",
+      "label": "Tiêu đề Chính",
+      "name": "about_7_title",
+      "type": "text",
+      "default_value": "Nền Tảng Phát Triển Bền Vững"
+    },
+    {
+      "key": "field_about_7_content",
+      "label": "Nội dung giới thiệu",
+      "name": "about_7_content",
+      "type": "wysiwyg"
+    },
+    {
+      "key": "field_about_7_img_1",
+      "label": "Ảnh 1 (Trên phải)",
+      "name": "about_7_img_1",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_about_7_img_2",
+      "label": "Ảnh 2 (Dưới trái)",
+      "name": "about_7_img_2",
+      "type": "image",
+      "return_format": "array"
+    },
+    {
+      "key": "field_about_7_img_3",
+      "label": "Ảnh 3 (Dưới phải)",
+      "name": "about_7_img_3",
+      "type": "image",
+      "return_format": "array"
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_template",
+        "operator": "==",
+        "value": "templates/template_about.php"
+      }
+    ]
+  ]
+}
