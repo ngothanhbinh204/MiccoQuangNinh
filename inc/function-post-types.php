@@ -191,91 +191,90 @@ add_action('init', 'create_dich_vu_taxonomy');
 // ============================================================================
 // REGISTER TUYỂN DỤNG (RECRUITMENT) POST TYPE
 // ============================================================================
-function create_tuyen_dung_post_type() {
-    $labels = array(
-        'name'                  => 'Tuyển Dụng',
-        'singular_name'         => 'Tuyển Dụng',
-        'menu_name'             => 'Tuyển Dụng',
-        'name_admin_bar'        => 'Tuyển Dụng',
-        'archives'              => 'Lưu trữ Tuyển Dụng',
-        'attributes'            => 'Thuộc tính Tuyển Dụng',
-        'parent_item_colon'     => 'Tuyển Dụng cha:',
-        'all_items'             => 'Tất cả Tuyển Dụng',
-        'add_new_item'          => 'Thêm Tuyển Dụng mới',
-        'add_new'               => 'Thêm mới',
-        'new_item'              => 'Tuyển Dụng mới',
-        'edit_item'             => 'Sửa Tuyển Dụng',
-        'update_item'           => 'Cập nhật Tuyển Dụng',
-        'view_item'             => 'Xem Tuyển Dụng',
-        'view_items'            => 'Xem các Tuyển Dụng',
-        'search_items'          => 'Tìm kiếm Tuyển Dụng',
-        'not_found'             => 'Không tìm thấy',
-        'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
-        'featured_image'        => 'Ảnh đại diện',
-        'set_featured_image'    => 'Đặt ảnh đại diện',
-        'remove_featured_image' => 'Xóa ảnh đại diện',
-        'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
-        'insert_into_item'      => 'Chèn vào Tuyển Dụng',
-        'uploaded_to_this_item' => 'Đã tải lên cho Tuyển Dụng này',
-        'items_list'            => 'Danh sách Tuyển Dụng',
-        'items_list_navigation' => 'Điều hướng danh sách Tuyển Dụng',
-        'filter_items_list'     => 'Lọc danh sách Tuyển Dụng',
-    );
+// function create_tuyen_dung_post_type() {
+//     $labels = array(
+//         'name'                  => 'Tuyển Dụng',
+//         'singular_name'         => 'Tuyển Dụng',
+//         'menu_name'             => 'Tuyển Dụng',
+//         'name_admin_bar'        => 'Tuyển Dụng',
+//         'archives'              => 'Lưu trữ Tuyển Dụng',
+//         'attributes'            => 'Thuộc tính Tuyển Dụng',
+//         'parent_item_colon'     => 'Tuyển Dụng cha:',
+//         'all_items'             => 'Tất cả Tuyển Dụng',
+//         'add_new_item'          => 'Thêm Tuyển Dụng mới',
+//         'add_new'               => 'Thêm mới',
+//         'new_item'              => 'Tuyển Dụng mới',
+//         'edit_item'             => 'Sửa Tuyển Dụng',
+//         'update_item'           => 'Cập nhật Tuyển Dụng',
+//         'view_item'             => 'Xem Tuyển Dụng',
+//         'view_items'            => 'Xem các Tuyển Dụng',
+//         'search_items'          => 'Tìm kiếm Tuyển Dụng',
+//         'not_found'             => 'Không tìm thấy',
+//         'not_found_in_trash'    => 'Không tìm thấy trong thùng rác',
+//         'featured_image'        => 'Ảnh đại diện',
+//         'set_featured_image'    => 'Đặt ảnh đại diện',
+//         'remove_featured_image' => 'Xóa ảnh đại diện',
+//         'use_featured_image'    => 'Sử dụng làm ảnh đại diện',
+//         'insert_into_item'      => 'Chèn vào Tuyển Dụng',
+//         'uploaded_to_this_item' => 'Đã tải lên cho Tuyển Dụng này',
+//         'items_list'            => 'Danh sách Tuyển Dụng',
+//         'items_list_navigation' => 'Điều hướng danh sách Tuyển Dụng',
+//         'filter_items_list'     => 'Lọc danh sách Tuyển Dụng',
+//     );
     
-    $args = array(
-        'labels'              => $labels,
-        'public'              => true,
-        'publicly_queryable'  => true,
-        'show_ui'             => true,
-        'show_in_menu'        => true,
-        'query_var'           => true,
-        'rewrite'             => array('slug' => 'tuyen-dung'),
-        'capability_type'     => 'post',
-        'has_archive'         => false,
-        'hierarchical'        => false,
-        'menu_position'       => null,
-        'supports'            => array('title', 'thumbnail', 'excerpt'),
-        'menu_icon'           => 'dashicons-businessman',
-    );
+//     $args = array(
+//         'labels'              => $labels,
+//         'public'              => true,
+//         'publicly_queryable'  => true,
+//         'show_ui'             => true,
+//         'show_in_menu'        => true,
+//         'query_var'           => true,
+//         'rewrite'             => array('slug' => 'tuyen-dung'),
+//         'capability_type'     => 'post',
+//         'has_archive'         => false,
+//         'hierarchical'        => false,
+//         'menu_position'       => null,
+//         'supports'            => array('title', 'thumbnail', 'excerpt'),
+//         'menu_icon'           => 'dashicons-businessman',
+//     );
 
-    register_post_type('tuyen-dung', $args);
-}
-add_action('init', 'create_tuyen_dung_post_type');
+//     register_post_type('tuyen-dung', $args);
+// }
+// add_action('init', 'create_tuyen_dung_post_type');
 
-// Register Danh Mục Tuyển Dụng Taxonomy
-function create_danh_muc_tuyen_dung_taxonomy() {
-    $labels = array(
-        'name'                       => 'Danh Mục Tuyển Dụng',
-        'singular_name'              => 'Danh Mục Tuyển Dụng',
-        'search_items'               => 'Tìm kiếm Danh Mục',
-        'popular_items'              => 'Danh Mục phổ biến',
-        'all_items'                  => 'Tất cả Danh Mục',
-        'parent_item'                => 'Danh Mục cha',
-        'parent_item_colon'          => 'Danh Mục cha:',
-        'edit_item'                  => 'Sửa Danh Mục',
-        'update_item'                => 'Cập nhật Danh Mục',
-        'add_new_item'               => 'Thêm Danh Mục mới',
-        'new_item_name'              => 'Tên Danh Mục mới',
-        'separate_items_with_commas' => 'Phân tách các Danh Mục bằng dấu phẩy',
-        'add_or_remove_items'        => 'Thêm hoặc xóa Danh Mục',
-        'choose_from_most_used'      => 'Chọn từ các Danh Mục được sử dụng nhiều nhất',
-        'not_found'                  => 'Không tìm thấy Danh Mục',
-        'menu_name'                  => 'Danh Mục Tuyển Dụng',
-    );
+// function create_danh_muc_tuyen_dung_taxonomy() {
+//     $labels = array(
+//         'name'                       => 'Danh Mục Tuyển Dụng',
+//         'singular_name'              => 'Danh Mục Tuyển Dụng',
+//         'search_items'               => 'Tìm kiếm Danh Mục',
+//         'popular_items'              => 'Danh Mục phổ biến',
+//         'all_items'                  => 'Tất cả Danh Mục',
+//         'parent_item'                => 'Danh Mục cha',
+//         'parent_item_colon'          => 'Danh Mục cha:',
+//         'edit_item'                  => 'Sửa Danh Mục',
+//         'update_item'                => 'Cập nhật Danh Mục',
+//         'add_new_item'               => 'Thêm Danh Mục mới',
+//         'new_item_name'              => 'Tên Danh Mục mới',
+//         'separate_items_with_commas' => 'Phân tách các Danh Mục bằng dấu phẩy',
+//         'add_or_remove_items'        => 'Thêm hoặc xóa Danh Mục',
+//         'choose_from_most_used'      => 'Chọn từ các Danh Mục được sử dụng nhiều nhất',
+//         'not_found'                  => 'Không tìm thấy Danh Mục',
+//         'menu_name'                  => 'Danh Mục Tuyển Dụng',
+//     );
 
-    $args = array(
-        'hierarchical'          => true,
-        'labels'                => $labels,
-        'show_ui'               => true,
-        'show_admin_column'     => true,
-        'query_var'             => true,
-        'rewrite'               => array('slug' => 'tuyen-dung-category'),
-        'show_in_rest'          => true,
-    );
+//     $args = array(
+//         'hierarchical'          => true,
+//         'labels'                => $labels,
+//         'show_ui'               => true,
+//         'show_admin_column'     => true,
+//         'query_var'             => true,
+//         'rewrite'               => array('slug' => 'tuyen-dung-category'),
+//         'show_in_rest'          => true,
+//     );
 
-    register_taxonomy('tuyen-dung-category', array('tuyen-dung'), $args);
-}
-add_action('init', 'create_danh_muc_tuyen_dung_taxonomy');
+//     register_taxonomy('tuyen-dung-category', array('tuyen-dung'), $args);
+// }
+// add_action('init', 'create_danh_muc_tuyen_dung_taxonomy');
 
 // ============================================================================
 // RANK MATH SEO INTEGRATION

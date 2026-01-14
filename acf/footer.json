@@ -44,6 +44,13 @@
             "type": "wysiwyg",
             "toolbar": "basic",
             "media_upload": 0
+          },
+          {
+            "key": "field_footer_address_map_link",
+            "label": "Link Bản đồ (Nếu có)",
+            "name": "map_link",
+            "type": "link",
+            "return_format": "array"
           }
         ]
       },
@@ -116,18 +123,11 @@
         "ui": 1
       },
       {
-        "key": "field_footer_hotline_text",
-        "label": "Hotline Text",
-        "name": "footer_hotline_text",
-        "type": "text",
-        "default_value": "1900 2273 – (028) 7100 0001"
-      },
-      {
-        "key": "field_footer_hotline_link",
-        "label": "Hotline Link",
-        "name": "footer_hotline_link",
-        "type": "text",
-        "instructions": "tel:19002273"
+        "key": "field_footer_hotline",
+        "label": "Hotline",
+        "name": "footer_hotline",
+        "type": "link",
+        "return_format": "array"
       },
       {
         "key": "field_footer_fixed_socials",
@@ -137,19 +137,59 @@
         "layout": "table",
         "button_label": "Thêm Icon",
         "sub_fields": [
-          {
-            "key": "field_footer_fixed_icon",
-            "label": "Icon Class",
-            "name": "icon",
-            "type": "text",
-            "instructions": "fa-light fa-envelope"
-          },
-          {
-            "key": "field_footer_fixed_link",
-            "label": "Link",
-            "name": "link",
-            "type": "url"
-          }
+            {
+                "key": "field_691e91f5bfa4e",
+                "label": "Icon",
+                "name": "icon",
+                "aria-label": "",
+                "type": "select",
+                "instructions": "Copy code của icon tại https://fontawesome.com/",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "location-dot": "Location",
+                    "phone": "Phone",
+                    "envelope": "Mail"
+                },
+                "default_value": false,
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 0,
+                "allow_in_bindings": 0,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": "",
+                "create_options": 0,
+                "save_options": 0,
+                "parent_repeater": "field_691e91eabfa4d"
+            },
+            {
+                "key": "field_691e9218bfa4f",
+                "label": "Content",
+                "name": "content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "allow_in_bindings": 0,
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0,
+                "parent_repeater": "field_691e91eabfa4d"
+            }
         ]
       }
     ],

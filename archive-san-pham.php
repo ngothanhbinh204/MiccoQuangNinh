@@ -9,8 +9,17 @@
 get_header();
 
 // Get ACF data from the associated page
-$page = get_page_by_path('san-pham');
-$page_id = $page ? $page->ID : 0;
+$page_id = 0;
+
+$pages = get_pages([
+    'meta_key'   => '_wp_page_template',
+    'meta_value' => 'templates/template_san_pham.php',
+    'number'     => 1,
+]);
+
+if (!empty($pages)) {
+    $page_id = $pages[0]->ID;
+}
 
 // Get ACF fields
 $page_title = get_field('page_title', $page_id) ?: __('Sản phẩm', 'canhcamtheme');

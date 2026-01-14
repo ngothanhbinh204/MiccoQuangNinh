@@ -13,12 +13,20 @@ $term_id = $term->term_id;
 $term_name = $term->name;
 $term_description = $term->description;
 
-// Get ACF data from the associated page (san-pham)
-$page = get_page_by_path('san-pham');
-$page_id = $page ? $page->ID : 0;
+$page_id = 0;
 
-// Get page settings
+$pages = get_pages([
+    'meta_key'   => '_wp_page_template',
+    'meta_value' => 'templates/template_san_pham.php',
+    'number'     => 1,
+]);
+
+if (!empty($pages)) {
+    $page_id = $pages[0]->ID;
+}
+
 $page_title = get_field('page_title', $page_id) ?: __('Sản phẩm', 'canhcamtheme');
+$page_description = get_field('page_description', $page_id);
 $intro_image = get_field('intro_image', $page_id);
 
 // Get all product categories for sidebar
@@ -39,22 +47,49 @@ $child_categories = get_terms(array(
 <!-- Breadcrumb Section -->
 <section class="global-breadcrumb">
     <div class="container">
-        <?php 
-        if (function_exists('rank_math_the_breadcrumbs')) {
-            rank_math_the_breadcrumbs();
-        } else { ?>
+        <?php if (function_exists('rank_math_the_breadcrumbs')): ?>
+
+            <?php rank_math_the_breadcrumbs(); ?>
+
+        <?php else: ?>
+
+            <?php
+            $products_page = get_page_by_template('templates/template_san_pham.php');
+            $products_page_id = $products_page ? $products_page->ID : 0;
+            var_dump($products_page_id);
+
+            // WPML support
+            if ($products_page_id && function_exists('icl_object_id')) {
+                $products_page_id = icl_object_id($products_page_id, 'page', true);
+            }
+            ?>
+
             <nav class="rank-math-breadcrumb" aria-label="breadcrumbs">
                 <p>
-                    <a href="<?php echo home_url(); ?>"><?php _e('Trang chủ', 'canhcamtheme'); ?></a>
-                    <span class="separator"> /</span>
-                    <a href="<?php echo get_post_type_archive_link('san-pham'); ?>"><?php echo esc_html($page_title); ?></a>
-                    <span class="separator"> /</span>
-                    <span class="last"><?php echo esc_html($term_name); ?></span>
+                    <a href="<?php echo esc_url(home_url('/')); ?>">
+                        <?php _e('Trang chủ', 'canhcamtheme'); ?>
+                    </a>
+
+                    <?php if ($products_page_id): ?>
+                        <span class="separator"> /</span>
+                        <a href="<?php echo esc_url(get_permalink($products_page_id)); ?>">
+                            <?php echo esc_html(get_the_title($products_page_id)); ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($term_name)): ?>
+                        <span class="separator"> /</span>
+                        <span class="last">
+                            <?php echo esc_html($term_name); ?>
+                        </span>
+                    <?php endif; ?>
                 </p>
             </nav>
-        <?php } ?>
+
+        <?php endif; ?>
     </div>
 </section>
+
 
 <!-- Section 1: Hero Section -->
 <section class="section-ProductList-1">
@@ -63,10 +98,10 @@ $child_categories = get_terms(array(
             <div class="section-py">
                 <div class="block-ProductList-1">
                     <div class="block-left">
-                        <h1 class="heading-1 text-Primary-2 leading-[1.4] font-bold"><?php echo esc_html($term_name); ?></h1>
-                        <?php if ($term_description): ?>
+                        <h1 class="heading-1 text-Primary-2 leading-[1.4] font-bold"><?php echo esc_html($page_title); ?></h1>
+                        <?php if ($page_description): ?>
                             <div class="content-product">
-                                <p><?php echo wp_kses_post($term_description); ?></p>
+                                <p><?php echo wp_kses_post($page_description); ?></p>
                             </div>
                         <?php endif; ?>
                     </div>

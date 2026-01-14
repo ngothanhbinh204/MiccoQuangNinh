@@ -1,4 +1,3 @@
-</main>
 <?php
 // Info Tab
 $footer_info_enable = get_field('footer_info_enable', 'option');
@@ -14,8 +13,7 @@ $footer_socials_list = get_field('footer_socials_list', 'option');
 
 // CTA Tab
 $footer_cta_enable = get_field('footer_cta_enable', 'option');
-$footer_hotline_text = get_field('footer_hotline_text', 'option');
-$footer_hotline_link = get_field('footer_hotline_link', 'option');
+$footer_hotline = get_field('footer_hotline', 'option');
 $footer_fixed_socials = get_field('footer_fixed_socials', 'option');
 ?>
 
@@ -39,6 +37,14 @@ $footer_fixed_socials = get_field('footer_fixed_socials', 'option');
 							<div class="label font-bold mb-1"><?php echo $item['label']; ?></div>
 							<?php endif; ?>
 							<?php echo $item['content']; ?>
+                            
+                            <?php if ($item['map_link']): 
+                                $link_url = $item['map_link']['url'];
+                                $link_title = $item['map_link']['title'];
+                                $link_target = $item['map_link']['target'] ? $item['map_link']['target'] : '_self';
+                            ?>
+                            <div class="view-map"> <a class="underline" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?></a></div>
+                            <?php endif; ?>
 						</div>
 						<?php endforeach; ?>
 					</div>
@@ -102,13 +108,16 @@ $footer_fixed_socials = get_field('footer_fixed_socials', 'option');
 			</div>
 		</div>
 
-		<?php if ($footer_hotline_text): ?>
-		<a class="btn btn-content bg-Primary-2"
-			href="<?php echo $footer_hotline_link ? $footer_hotline_link : 'javascript:void(0)'; ?>">
+		<?php if ($footer_hotline): 
+            $hotline_url = $footer_hotline['url'];
+            $hotline_title = $footer_hotline['title'];
+            $hotline_target = $footer_hotline['target'] ? $footer_hotline['target'] : '_self';
+        ?>
+		<a class="btn btn-content bg-Primary-2" href="<?php echo esc_url($hotline_url); ?>" target="<?php echo esc_attr($hotline_target); ?>">
 			<div class="btn-icon">
 				<div class="icon"><i class="fa-light fa-phone"></i></div>
 			</div>
-			<div class="content"><?php echo $footer_hotline_text; ?></div>
+			<div class="content"><?php echo esc_html($hotline_title); ?></div>
 		</a>
 		<?php endif; ?>
 
@@ -119,11 +128,20 @@ $footer_fixed_socials = get_field('footer_fixed_socials', 'option');
 			</div>
 			<div class="content">
 				<ul>
-					<?php foreach ($footer_fixed_socials as $fsocial): ?>
+					<?php foreach ($footer_fixed_socials as $fsocial): 
+                        // Icon mapping based on choices
+                        // "location-dot": "Location", "phone": "Phone", "envelope": "Mail"
+                        // Assuming prefix is fa-light based on existing classes
+                        $icon_class = $fsocial['icon'] ? 'fa-light fa-' . $fsocial['icon'] : '';
+						$icon_link = $fsocial['link']['url'] ? $fsocial['link']['url'] : '#';
+						$icon_target = $fsocial['link']['target'] ? $fsocial['link']['target'] : '_self';
+                    ?>	
 					<li>
-						<a href="<?php echo $fsocial['link']; ?>" target="_blank">
-							<i class="<?php echo $fsocial['icon']; ?>"></i>
-						</a>
+                        <?php if ($icon_class): ?>
+                            <div class="flex items-center gap-2">
+								<a href="<?php echo esc_url($icon_link); ?>" target="<?php echo esc_attr($icon_target); ?>"> <i class="<?php echo esc_attr($icon_class); ?>"></i></a>
+                            </div>
+                        <?php endif; ?>
 					</li>
 					<?php endforeach; ?>
 				</ul>

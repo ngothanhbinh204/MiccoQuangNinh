@@ -10,13 +10,73 @@ get_template_part('modules/common/banner');
 // Get current category
 $current_term = get_queried_object();
 $current_term_id = $current_term->term_id;
+$parent_term_id = $current_term->parent;
 
-// Get all categories for the filter
-$categories = get_categories(array(
+// ✅ Xác định category gốc hiện tại
+if ($parent_term_id != 0) {
+    // Đang ở category con → tìm category cha gốc
+    $current_root_id = $parent_term_id;
+    $temp_cat = get_category($parent_term_id);
+    while ($temp_cat->parent != 0) {
+        $current_root_id = $temp_cat->parent;
+        $temp_cat = get_category($current_root_id);
+    }
+} else {
+    // Đang ở category gốc
+    $current_root_id = $current_term_id;
+}
+
+// ✅ Lấy TẤT CẢ danh mục gốc (parent = 0)
+$root_categories = get_categories(array(
+    'parent' => 0,
+    'hide_empty' => false,
     'orderby' => 'name',
-    'order'   => 'ASC',
-    'hide_empty' => false, // Or true if you want to hide empty ones
+    'order' => 'ASC',
 ));
+
+// ✅ Build danh sách tab để hiển thị
+$tabs_to_display = array();
+
+foreach ($root_categories as $root_cat) {
+    // Kiểm tra category gốc có danh mục con không
+    $children = get_categories(array(
+        'parent' => $root_cat->term_id,
+        'hide_empty' => false,
+        'orderby' => 'name',
+        'order' => 'ASC',
+    ));
+    
+    $has_children = !empty($children);
+    
+    // ✅ FIX: Nếu category có con, luôn hiển thị "Tất cả" + các con
+    if ($has_children) {
+        // Thêm tab "Tất cả" (đại diện cho category cha)
+        $tabs_to_display[] = array(
+            'id' => $root_cat->term_id,
+            'name' => __('Tất cả', 'canhcamtheme'),
+            'url' => get_category_link($root_cat->term_id),
+            'is_active' => ($current_root_id == $root_cat->term_id && $current_term_id == $root_cat->term_id),
+        );
+        
+        // Thêm các danh mục con
+        foreach ($children as $child) {
+            $tabs_to_display[] = array(
+                'id' => $child->term_id,
+                'name' => $child->name,
+                'url' => get_category_link($child->term_id),
+                'is_active' => ($current_term_id == $child->term_id),
+            );
+        }
+    } else {
+        // Danh mục gốc không có con - hiển thị bình thường
+        $tabs_to_display[] = array(
+            'id' => $root_cat->term_id,
+            'name' => $root_cat->name,
+            'url' => get_category_link($root_cat->term_id),
+            'is_active' => ($current_term_id == $root_cat->term_id),
+        );
+    }
+}
 ?>
 
 <section class="section-news section-py">
@@ -26,14 +86,11 @@ $categories = get_categories(array(
             <!-- Category Filter -->
             <div class="news-heading-and-tab flex-center flex-wrap gap-4">
                 <ul class="nav-primary">
-                    <li class="<?php echo (is_home() && !is_category()) ? 'active' : ''; ?>">
-                         <a href="<?php echo get_post_type_archive_link('post'); ?>"><?php _e('Tất cả', 'canhcamtheme'); ?></a>
-                    </li>
-                    <?php foreach ($categories as $cat): 
-                        $active_class = ($current_term_id == $cat->term_id) ? 'active' : '';
-                    ?>
-                    <li class="<?php echo $active_class; ?>">
-                        <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo esc_html($cat->name); ?></a>
+                    <?php foreach ($tabs_to_display as $tab): ?>
+                    <li class="<?php echo $tab['is_active'] ? 'active' : ''; ?>">
+                        <a href="<?php echo esc_url($tab['url']); ?>">
+                            <?php echo esc_html($tab['name']); ?>
+                        </a>
                     </li>
                     <?php endforeach; ?>
                 </ul>
@@ -42,7 +99,6 @@ $categories = get_categories(array(
             <?php if (have_posts()): ?>
                 <?php 
                 $count = 0;
-                // Start a buffer for the grid items to render later
                 ob_start(); 
                 ?>
                 
@@ -50,28 +106,17 @@ $categories = get_categories(array(
                 <?php while (have_posts()) : the_post(); $count++; ?>
                     
                     <?php if ($count === 1): 
-                        // First post - Highlight Layout - Capture it separately
-                        // We will actually just display it immediately if we were inline, 
-                        // but to match the HTML structure (tab-news-item BEFORE list-news), 
-                        // we can do logic here. 
-                        // Actually, better logic: handled outside the buffer? 
-                        // No, let's simpler:
-                        // The loop structure in PHP makes it hard to separate 1 vs rest if we want to wrap "rest" in a UL.
-                        // So I'll store the first post data and continue.
-                        
                         $feat_title = get_the_title();
                         $feat_link = get_permalink();
                         $feat_date = get_the_date('d/m/Y');
                         $feat_excerpt = get_the_excerpt();
-                        $feat_img = get_the_post_thumbnail(get_the_ID(), 'full', array('class' => 'lozad')); // Or custom size
+                        $feat_img = get_the_post_thumbnail(get_the_ID(), 'full', array('class' => 'lozad')); 
                         if (!$feat_img) {
                              $feat_img = '<img class="lozad" data-src="'.get_template_directory_uri().'/img/placeholder.jpg" alt="'.esc_attr($feat_title).'">';
                         }
-                        // Use a specific image structure if possible, usually theme has a helper
-                        // get_image_attrachment requires attachment ID.
                         $feat_img_id = get_post_thumbnail_id();
                         
-                        continue; // Skip the grid rendering for this one
+                        continue;
                     endif; 
                     ?>
 
@@ -112,8 +157,8 @@ $categories = get_categories(array(
                 $grid_html = ob_get_clean(); 
                 ?>
 
-                <!-- 1. Render Featured Post (from iteration 1) -->
-                <?php if ($count > 0): // Meaning we found at least 1 post ?>
+                <!-- 1. Render Featured Post -->
+                <?php if ($count > 0): ?>
                 <div class="tab-news-item flex -lg:flex-col items-stretch rounded-5 overflow-hidden">
                     <div class="img-thumb w-full lg:shrink-0 lg:w-[calc(1184/1600*100%)]">
                         <a class="img-ratio ratio:pt-[652_1184]" href="<?php echo esc_url($feat_link); ?>">
